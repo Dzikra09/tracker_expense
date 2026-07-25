@@ -14,12 +14,14 @@ const getTransactions = async (req, res) => {
     `;
     const params = [userId];
 
-    if (start_date) {
-      query += ' AND t.transaction_date >= ?';
+    if (start_date && end_date) {
+      query += ' AND DATE(t.transaction_date) BETWEEN ? AND ?';
+      params.push(start_date, end_date);
+    } else if (start_date) {
+      query += ' AND DATE(t.transaction_date) >= ?';
       params.push(start_date);
-    }
-    if (end_date) {
-      query += ' AND t.transaction_date <= ?';
+    } else if (end_date) {
+      query += ' AND DATE(t.transaction_date) <= ?';
       params.push(end_date);
     }
     if (category_id) {

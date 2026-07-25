@@ -151,8 +151,22 @@
 
         <div class="tracker-search">
           <form id="searchTransactionForm" data-testid="searchTransactionForm" class="tracker-search__form" role="search">
-            <input type="search" id="searchTransactionFormTitleInput" data-testid="searchTransactionFormTitleInput" class="tracker-form__input" placeholder="Cari transaksi berdasarkan judul..." aria-label="Kata kunci pencarian transaksi">
-            <button type="submit" data-testid="searchTransactionFormSubmitButton" class="tracker-search__submit" aria-label="Mulai Pencarian">Cari</button>
+            <div class="tracker-search__field tracker-search__field--keyword">
+              <label for="searchTransactionFormTitleInput" class="tracker-search__label">Cari Judul</label>
+              <input type="search" id="searchTransactionFormTitleInput" data-testid="searchTransactionFormTitleInput" class="tracker-form__input" placeholder="Cari transaksi berdasarkan judul..." aria-label="Kata kunci pencarian transaksi">
+            </div>
+            <div class="tracker-search__field">
+              <label for="startDateInput" class="tracker-search__label">Dari Tanggal</label>
+              <input type="date" id="startDateInput" class="tracker-form__input" aria-label="Dari Tanggal">
+            </div>
+            <div class="tracker-search__field">
+              <label for="endDateInput" class="tracker-search__label">Sampai Tanggal</label>
+              <input type="date" id="endDateInput" class="tracker-form__input" aria-label="Sampai Tanggal">
+            </div>
+            <div class="tracker-search__actions">
+              <button type="submit" data-testid="searchTransactionFormSubmitButton" class="tracker-search__submit" aria-label="Mulai Pencarian">Cari</button>
+              <button type="button" id="resetFilterBtn" class="tracker-search__reset-btn" aria-label="Reset Filter">Reset Filter</button>
+            </div>
           </form>
         </div>
 

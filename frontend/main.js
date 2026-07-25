@@ -388,7 +388,7 @@ const handleEdit = (id) => {
  * mengambil ulang data terbaru dari server (bukan hanya merender ulang array lokal).
  */
 document.addEventListener('transaction:updated', () => {
-    fetchTransactions({ keyword: searchKeyword });
+    fetchTransactions(getActiveFilters());
     fetchDashboardSummary();
 });
 
@@ -423,19 +423,53 @@ const handleToggleType = async (id) => {
  * parameter keyword, bukan lagi memfilter array lokal secara langsung.
  * (Akan disempurnakan penuh dengan filter tanggal & kategori di Tahap 7e)
  */
-const searchInputEl = document.getElementById('searchTransactionFormTitleInput');
-const searchFormEl  = document.getElementById('searchTransactionForm');
+const searchInputEl    = document.getElementById('searchTransactionFormTitleInput');
+const searchFormEl     = document.getElementById('searchTransactionForm');
+const startDateInputEl = document.getElementById('startDateInput');
+const endDateInputEl   = document.getElementById('endDateInput');
+const resetFilterBtnEl = document.getElementById('resetFilterBtn');
+
+// Helper function untuk mendapatkan seluruh filter aktif (keyword, start_date, end_date)
+const getActiveFilters = () => {
+    const filters = {};
+    if (searchKeyword && searchKeyword.trim()) {
+        filters.keyword = searchKeyword.trim();
+    }
+    if (startDateInputEl && startDateInputEl.value) {
+        filters.start_date = startDateInputEl.value;
+    }
+    if (endDateInputEl && endDateInputEl.value) {
+        filters.end_date = endDateInputEl.value;
+    }
+    return filters;
+};
 
 searchInputEl.addEventListener('input', (e) => {
     searchKeyword = e.target.value;
-    fetchTransactions({ keyword: searchKeyword });
+    fetchTransactions(getActiveFilters());
+});
+
+startDateInputEl?.addEventListener('change', () => {
+    fetchTransactions(getActiveFilters());
+});
+
+endDateInputEl?.addEventListener('change', () => {
+    fetchTransactions(getActiveFilters());
+});
+
+resetFilterBtnEl?.addEventListener('click', () => {
+    searchInputEl.value = '';
+    searchKeyword = '';
+    if (startDateInputEl) startDateInputEl.value = '';
+    if (endDateInputEl) endDateInputEl.value = '';
+    fetchTransactions({});
 });
 
 // Pencarian via tombol "Cari" (submit form pencarian)
 searchFormEl.addEventListener('submit', (e) => {
     e.preventDefault();
     searchKeyword = searchInputEl.value;
-    fetchTransactions({ keyword: searchKeyword });
+    fetchTransactions(getActiveFilters());
 });
 
 /**
