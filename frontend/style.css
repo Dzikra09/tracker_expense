@@ -731,7 +731,8 @@ body,
 .tracker-transaction-item__btn,
 .tracker-category-chip,
 .tracker-header__avatar,
-.theme-toggle-btn {
+.theme-toggle-btn,
+.tracker-export-btn {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -791,3 +792,48 @@ body.dark-mode .tracker-search__reset-btn:hover {
   background: var(--bg-hover);
   color: var(--text-dark);
 }
+
+/* =========================================================
+   STYLING TOMBOL EXPORT EXCEL
+   ========================================================= */
+.tracker-history__export-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.tracker-export-btn {
+  background: var(--bg-card);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+  padding: 0.6rem 1.25rem;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.tracker-export-btn:hover {
+  background: var(--bg-hover);
+  transform: scale(1.02);
+}
+
+.tracker-export-btn:active {
+  transform: scale(0.98);
+}
+
+body.dark-mode .tracker-export-btn {
+  background: var(--bg-card);
+  color: var(--text-dark);
+  border-color: var(--border-light);
+}
+
+body.dark-mode .tracker-export-btn:hover {
+  background: var(--bg-hover);
+}
+

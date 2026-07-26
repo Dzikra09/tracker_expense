@@ -133,3 +133,7 @@ const handleDeleteCategory = async (id) => {
     alert('Gagal menghapus kategori. Pastikan server backend berjalan.');
   }
 };
+
+document.addEventListener('app:ready', () => {
+  fetchCategories();
+});

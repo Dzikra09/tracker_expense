@@ -518,3 +518,47 @@ if (themeToggleBtn) {
         applyTheme(newTheme);
     });
 }
+
+/**
+ * ========================================================
+ * FITUR EXPORT TRANSAKSI KE EXCEL (.xlsx)
+ * ========================================================
+ */
+const exportExcelBtn = document.getElementById('exportExcelBtn');
+
+if (exportExcelBtn) {
+    exportExcelBtn.addEventListener('click', () => {
+        // Tampilkan alert jika tidak ada data
+        if (!transactions || transactions.length === 0) {
+            alert('Tidak ada data untuk diexport');
+            return;
+        }
+
+        // Petakan kolom: Tanggal, Keterangan, Kategori, Tipe, Nominal
+        const dataToExport = transactions.map((t) => {
+            const isIncome = t.type === 'income';
+            return {
+                'Tanggal': formatDate(t.transaction_date),
+                'Keterangan': t.title || '',
+                'Kategori': t.category_name || '-',
+                'Tipe': isIncome ? 'Pemasukan' : 'Pengeluaran',
+                'Nominal': Number(t.amount)
+            };
+        });
+
+        // Buat workbook & sheet menggunakan SheetJS
+        const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Transaksi');
+
+        // Unduh dengan format: expense-tracker-export-[tanggal hari ini].xlsx
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const formattedToday = `${yyyy}-${mm}-${dd}`;
+        const fileName = `expense-tracker-export-${formattedToday}.xlsx`;
+
+        XLSX.writeFile(workbook, fileName);
+    });
+}

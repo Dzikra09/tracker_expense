@@ -104,8 +104,6 @@ const showApp = () => {
   const user = JSON.parse(localStorage.getItem(USER_KEY));
   document.querySelector('.tracker-header__greeting').innerHTML =
     `Halo, <strong>${user.full_name} (${user.username})</strong>`;
-
-  fetchCategories();
   
   // Beri sinyal ke main.js bahwa user siap, agar data awal (kategori, transaksi) di-fetch
   document.dispatchEvent(new Event('app:ready'));
@@ -130,4 +128,4 @@ const initAuth = () => {
   }
 };
 
-initAuth();   
+window.addEventListener('load', initAuth);
