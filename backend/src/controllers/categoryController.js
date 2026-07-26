@@ -23,12 +23,12 @@ const getCategories = async (req, res) => {
       data: categories,
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengambil data kategori',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // POST tambah kategori baru
@@ -62,12 +62,12 @@ const createCategory = async (req, res) => {
       data: { id: result.insertId, name, type, icon },
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal menambahkan kategori',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // PUT ubah kategori
@@ -107,12 +107,12 @@ const updateCategory = async (req, res) => {
       message: 'Kategori berhasil diperbarui',
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal memperbarui kategori',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // DELETE kategori, ditolak jika masih dipakai transaksi
@@ -154,12 +154,12 @@ const deleteCategory = async (req, res) => {
       message: 'Kategori berhasil dihapus',
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal menghapus kategori',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 module.exports = { getCategories, createCategory, updateCategory, deleteCategory };

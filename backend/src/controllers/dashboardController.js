@@ -48,12 +48,12 @@ const getSummary = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengambil ringkasan dashboard',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // Agregasi nominal per kategori (untuk pie chart)
@@ -89,12 +89,12 @@ const getByCategory = async (req, res) => {
       data: rows,
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengambil data agregasi per kategori',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // Agregasi per bulan (untuk tren chart)
@@ -132,12 +132,12 @@ const getMonthlyTrend = async (req, res) => {
       data: trendData,
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengambil data tren bulanan',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 module.exports = { getSummary, getByCategory, getMonthlyTrend };

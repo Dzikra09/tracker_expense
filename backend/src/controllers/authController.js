@@ -42,12 +42,12 @@ const register = async (req, res) => {
       message: 'Registrasi berhasil',
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Terjadi kesalahan pada server',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // LOGIN
@@ -108,12 +108,12 @@ const login = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Terjadi kesalahan pada server',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 module.exports = { register, login };

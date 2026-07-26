@@ -46,12 +46,12 @@ const getTransactions = async (req, res) => {
       data: transactions,
     });
   } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengambil data transaksi',
-      error: error.message,
-    });
-  }
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // POST tambah transaksi baru
@@ -109,13 +109,13 @@ const createTransaction = async (req, res) => {
       message: 'Transaksi berhasil ditambahkan',
       data: { id: result.insertId },
     });
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal menambahkan transaksi',
-      error: error.message,
-    });
-  }
+ } catch (error) {
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // PUT ubah transaksi
@@ -172,13 +172,13 @@ const updateTransaction = async (req, res) => {
       status: 'success',
       message: 'Transaksi berhasil diperbarui',
     });
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal memperbarui transaksi',
-      error: error.message,
-    });
-  }
+ } catch (error) {
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // DELETE transaksi
@@ -205,13 +205,13 @@ const deleteTransaction = async (req, res) => {
       status: 'success',
       message: 'Transaksi berhasil dihapus',
     });
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal menghapus transaksi',
-      error: error.message,
-    });
-  }
+} catch (error) {
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 // PATCH ubah tipe transaksi (income <-> expense)
@@ -244,13 +244,13 @@ const toggleTransactionType = async (req, res) => {
       message: 'Tipe transaksi berhasil diubah',
       data: { type: newType },
     });
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Gagal mengubah tipe transaksi',
-      error: error.message,
-    });
-  }
+ } catch (error) {
+  console.error(error); // tetap tercatat di log server Railway untuk kebutuhan debugging
+  res.status(500).json({
+    status: 'error',
+    message: 'Gagal mengambil data transaksi',
+  });
+}
 };
 
 module.exports = {
